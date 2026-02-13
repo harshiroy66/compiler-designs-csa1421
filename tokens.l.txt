@@ -1,0 +1,26 @@
+%{
+#include <stdio.h>
+int token_count = 0;
+%}
+
+%%
+[a-zA-Z_][a-zA-Z0-9_]*   { token_count++; }   /* identifiers */
+[0-9]+                  { token_count++; }   /* numbers */
+"=="|"!="|"<="|">="     { token_count++; }   /* relational operators */
+[+\-*/=<>]              { token_count++; }   /* operators */
+[;(),{}]                { token_count++; }   /* separators */
+[ \t\n]+                { /* ignore whitespace */ }
+.                       { /* ignore other characters */ }
+%%
+
+int main()
+{
+    yylex();
+    printf("Total number of tokens = %d\n", token_count);
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}

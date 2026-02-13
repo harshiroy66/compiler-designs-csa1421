@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+abc     { printf("ABC"); }   /* convert substring */
+.|\n    { printf("%s", yytext); }  /* print other characters */
+%%
+
+int main()
+{
+    yylex();
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}

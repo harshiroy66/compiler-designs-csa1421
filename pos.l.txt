@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[-][0-9]+    { printf("Negative number\n"); }
+[0-9]+       { printf("Positive number\n"); }
+\n           { /* ignore newline */ }
+.            { /* ignore other characters */ }
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}

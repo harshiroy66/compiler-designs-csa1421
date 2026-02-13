@@ -1,0 +1,20 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+"="|"+"|"/"|"*"   { printf("valid"); }
+.                 { printf("invalid"); }
+%%
+
+int yywrap()
+{
+    return 1;
+}
+
+int main()
+{
+    printf("enter the input:");
+    yylex();
+    return 0;
+}

@@ -1,0 +1,24 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+[A-Z]+        { printf("Capital word: %s\n", yytext); }
+
+[a-zA-Z]+     { /* ignore other words */ }
+
+[ \t\n]+      { /* ignore whitespace */ }
+
+.             { /* ignore other characters */ }
+%%
+
+int main()
+{
+    yylex();
+    return 0;
+}
+
+int yywrap()
+{
+    return 1;
+}
