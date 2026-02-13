@@ -1,0 +1,21 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+"<"[a-zA-Z][a-zA-Z0-9]*">"        { printf("HTML Opening Tag: %s\n", yytext); }
+"</"[a-zA-Z][a-zA-Z0-9]*">"       { printf("HTML Closing Tag: %s\n", yytext); }
+"<"[a-zA-Z][a-zA-Z0-9]*[ ]*"/>"   { printf("Self-closing Tag: %s\n", yytext); }
+[a-zA-Z0-9 ]+                     { printf("Text: %s\n", yytext); }
+\n                                { /* ignore newline */ }
+.                                 { /* ignore other characters */ }
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}
